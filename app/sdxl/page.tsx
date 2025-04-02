@@ -20,14 +20,13 @@ export default function SDXLPage(): JSX.Element {
       });
 
       const data = await response.json();
-      console.log("API Response:", data); // Debugging
+      console.log("API Response:", data);
 
       if (data.imageUrl) {
-        // Check if response is Base64 and prepend correct prefix
         if (data.imageUrl.startsWith("/9j/") || data.imageUrl.length > 100) {
           setImageUrl(`data:image/png;base64,${data.imageUrl}`);
         } else {
-          setImageUrl(data.imageUrl); // Use URL if available
+          setImageUrl(data.imageUrl);
         }
       } else {
         setError("Failed to generate image.");
@@ -36,6 +35,7 @@ export default function SDXLPage(): JSX.Element {
       console.error("Error:", err);
       setError("Something went wrong. Check the console.");
     }
+
     setLoading(false);
   };
 
@@ -47,7 +47,10 @@ export default function SDXLPage(): JSX.Element {
         className="border rounded p-2 w-96 h-24 text-black"
         placeholder="Enter your prompt..."
         value={prompt}
-        onChange={(e) => setPrompt(e.target.value)}
+        onChange={(e) => {
+          setPrompt(e.target.value);
+          setError(""); // clear previous errors when typing again
+        }}
       />
 
       <button
@@ -63,7 +66,11 @@ export default function SDXLPage(): JSX.Element {
       {imageUrl && (
         <div className="mt-4">
           <h2 className="text-lg font-semibold">Generated Image:</h2>
-          <img src={imageUrl} alt="Generated AI Art" className="mt-2 w-full max-w-md rounded-lg shadow-md border border-gray-700" />
+          <img
+            src={imageUrl}
+            alt="Generated AI Art"
+            className="mt-2 w-full max-w-md rounded-lg shadow-md border border-gray-700"
+          />
         </div>
       )}
     </div>

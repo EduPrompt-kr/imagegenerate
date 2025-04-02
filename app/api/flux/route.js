@@ -11,8 +11,8 @@ export async function POST(req) {
 
     const [width, height] = imageSize.split("x").map(Number); // Convert size to numbers
 
-    const RUNPOD_API_URL = "https://api.runpod.ai/v2/sla9dllpuzslfi/runsync";
-    const API_KEY = "yourapi_key";  // Replace with your actual RunPod API Key
+    const RUNPOD_API_URL = "https://api.runpod.ai/v2/yy1rao0wwxtzxx/runsync";
+    const API_KEY = "your_apikey";  // Replace with your actual RunPod API Key
 
     const response = await axios.post(
       RUNPOD_API_URL,
